@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const {mongoose} = require('./db/mongoose');
 
+
 const mainRoute = require('./routes/index');
 
 
@@ -29,4 +30,6 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Listening to port ${port}`);
-})
+});
+
+module.exports = app;

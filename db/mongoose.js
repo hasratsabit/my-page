@@ -1,14 +1,16 @@
 
 const mongoose = require('mongoose');
+require('../config/config');
 
-mongoose.connect('mongodb://127.0.0.1:27017/MyPage', (err) => {
-  if(err) {
-    return console.log(`Database error occurred: ${err}`);
-  }
+mongoose.Promise = global.Promise;
 
-  console.log('Database successfully connected.');
-});
+mongoose.connect(process.env.MONGODB_URI, (err) => {
+    if(err) {
+        return console.log(`Database error: ${err}`);
+    }
+    console.log('Database successfully connected.');
+})
 
 module.exports = {
-  mongoose
+    mongoose
 }
