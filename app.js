@@ -3,8 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
-const {mongoose} = require('./db/mongoose');
-
+const mongoose = require('./db/mongoose');
 
 const mainRoute = require('./routes/index');
 
@@ -26,7 +25,7 @@ app.get('*', (req, res) => {
 });
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Listening to port ${port}`);

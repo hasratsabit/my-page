@@ -4,13 +4,8 @@ require('../config/config');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URI, (err) => {
-    if(err) {
-        return console.log(`Database error: ${err}`);
-    }
-    console.log('Database successfully connected.');
-})
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Database is connected.");
+  }).catch((err) => console.log(err))
 
-module.exports = {
-    mongoose
-}

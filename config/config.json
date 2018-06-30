@@ -1,6 +1,6 @@
 {
   "test": {
-    "PORT": 3000,
+    "PORT": 8080,
     "MONGODB_URI": "mongodb://localhost:27018/MyPageTest",
     "JWT_SECRET": "sfa09gh7gs96hdh8g7h6fg7h5g75j7"
   },
