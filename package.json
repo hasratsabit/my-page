@@ -6,7 +6,7 @@
   "scripts": {
     "test": "export NODE_ENV=test && mocha ./**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'",
-    "build": "cd my-app && ng build --prod && cd .. && node app.js",
+    "build": "export NODE_ENV=production && cd my-app && ng build --prod && cd .. && node app.js",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.1.7"

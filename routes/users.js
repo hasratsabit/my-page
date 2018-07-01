@@ -25,25 +25,27 @@ router.post('/', (req, res) => {
       password: req.body.password
     });
 
-    user.save().then(() => {
-      res.json({ success: true, message: 'Congratulations! You are signed up.'});
-    }).catch((err) => {
-      if(err.code === 11000) {
-        res.status(404).json({ success: false, message: 'Email or username already exist.'});
+    user.save((err) => {
+      if(err) {
+        if(err.code === 11000) {
+          res.status(404).json({ success: false, message: 'Email or username already exist.'});
+        }
+        else if(err.errors.name) {
+          res.status(404).json({ success: false, message: err.errors.name.message });
+        }
+        else if(err.errors.email) {
+          res.status(404).json({ success: false, message: err.errors.email.message });
+        }
+        else if(err.errors.username) {
+          res.status(404).json({ success: false, message: err.errors.username.message });
+        }
+        else if(err.errors.password) {
+          res.status(404).json({ success: false, message: err.errors.password.message });
+        } 
+        else res.status(404).json({ success: false, message: err });
+      }else {
+        res.json({ success: true, message: 'Congratulations! You are signed up.'});
       }
-      else if(err.errors.name) {
-        res.status(404).json({ success: false, message: err.errors.name.message });
-      }
-      else if(err.errors.email) {
-        res.status(404).json({ success: false, message: err.errors.email.message });
-      }
-      else if(err.errors.username) {
-        res.status(404).json({ success: false, message: err.errors.username.message });
-      }
-      else if(err.errors.password) {
-        res.status(404).json({ success: false, message: err.errors.password.message });
-      } 
-      else res.status(404).json({ success: false, message: err });
     })
 
   }
