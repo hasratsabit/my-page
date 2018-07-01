@@ -9,10 +9,5 @@
     "PORT": 3000,
     "MONGODB_URI": "mongodb://localhost:27018/MyPage",
     "JWT_SECRET": "546l45j65l46k4574gjg4jq34gj4"
-  },
-
-  "production": {
-    "PORT": 3000,
-    "MONGODB_URI": "mongodb://hasrat:Lima1234@ds123151.mlab.com:23151/hasrat_personal_page"
   }
 }
