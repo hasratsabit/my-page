@@ -3,32 +3,156 @@
         <h1 class="form__title">Registeration</h1>
     </div>
     <div class="form__input-container">
-      <form>
+      <form [formGroup]="form" (submit)="onRegisterUser()">
+
+        <!-- Full Name -->
         <div class="form__group">
-          <input type="text" class="form__input" placeholder="Full Name">
-          <!-- <span class="form__hint success-hint">Name is required.</span> -->
-        </div>
-        <div class="form__group">
-          <input type="email" class="form__input" placeholder="Email">
-          <!-- <span class="form__hint success-hint">Name is required.</span> -->
-        </div>
-        <div class="form__group">
-          <input type="text" class="form__input" placeholder="Username">
-          <!-- <span class="form__hint success-hint">Name is required.</span> -->
-        </div>
-        <div class="form__group">
-          <input type="password" class="form__input" placeholder="Password">
-          <!-- <span class="form__hint success-hint">Name is required.</span> -->
-        </div>
-        <div class="form__group">
-          <input type="password" class="form__input" placeholder="Confirm Password">
-          <!-- <span class="form__hint success-hint">Name is required.</span> -->
+          <input 
+            type="text" 
+            class="form__input"
+            placeholder="Full Name"
+            name="name" 
+            formControlName="name"
+            autocomplete="off" 
+            required>
+
+            <p class="form__hint" 
+              [ngClass]="
+              {'error-hint': form.controls.name.dirty && form.controls.name.errors, 
+              'success-hint': !form.controls.name.errors }">
+              <span *ngIf="form.controls.name.dirty && form.controls.name.errors?.required">
+                Full Name is required.
+              </span>
+              <span *ngIf="form.controls.name.dirty && form.controls.name.errors?.minlength">
+                The full name must be at least 2 characters.
+              </span>
+              <span *ngIf="form.controls.name.dirty && form.controls.name.errors?.maxlength">
+                The full name cannot exceed 20 characters.
+              </span>
+              <span *ngIf="(form.controls.name.dirty && form.controls.name.errors?.validateName) && !form.controls.name.errors?.required">
+                The full name must not contain special characters.
+              </span>
+            </p>
         </div>
 
+        <!-- Email -->
         <div class="form__group">
-          <button class="button button--primary form__button">Register</button>
-          <button class="button button--default form__button">Cancel</button>
+            <input 
+              type="email" 
+              class="form__input" 
+              placeholder="Email"
+              name="email"
+              formControlName="email"
+              required>
+
+            <p class="form__hint" 
+              [ngClass]="
+              {'error-hint': form.controls.email.dirty && form.controls.email.errors, 
+              'success-hint': !form.controls.email.errors }">
+              <span *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">
+                Email is required.
+              </span>
+              <span *ngIf="form.controls.email.dirty && form.controls.email.errors?.minlength">
+                Email must be at least 2 characters.
+              </span>
+              <span *ngIf="form.controls.email.dirty && form.controls.email.errors?.maxlength">
+                Email cannot exceed 30 characters.
+              </span>
+              <span *ngIf="(form.controls.email.dirty && form.controls.email.errors?.validateEmail) && 
+              (!form.controls.email.errors?.required && !form.controls.email.errors?.minlength)">
+                Email is not valid. Please provide a valid email like example@example.com.
+              </span>
+            </p>
         </div>
+
+        <!-- Username -->
+        <div class="form__group">
+          <input 
+            type="text" 
+            class="form__input" 
+            placeholder="Username"
+            name="username" 
+            formControlName="username" 
+            required>
+          
+          <p class="form__hint" 
+            [ngClass]="
+            {'error-hint': form.controls.username.dirty && form.controls.username.errors, 
+            'success-hint': !form.controls.username.errors }">
+            <span *ngIf="form.controls.username.dirty && form.controls.username.errors?.required">
+              Username is required.
+            </span>
+            <span *ngIf="form.controls.username.dirty && form.controls.username.errors?.minlength">
+              Username must be at least 3 characters.
+            </span>
+            <span *ngIf="form.controls.username.dirty && form.controls.username.errors?.maxlength">
+              Username cannot exceed 15 characters.
+            </span>
+            <span *ngIf="(form.controls.username.dirty && form.controls.username.errors?.validateUsername) && 
+            (!form.controls.username.errors?.required && !form.controls.username.errors?.minlength)">
+              Username can be only letters and numbers. It must not contain special characters.
+            </span>
+          </p>
+        </div>
+
+        <!-- Password -->
+        <div class="form__group">
+          <input 
+            type="password" 
+            class="form__input" 
+            placeholder="Password"
+            name="password" 
+            formControlName="password" 
+            required>
+
+          <p class="form__hint" 
+            [ngClass]="
+            {'error-hint': form.controls.password.dirty && form.controls.password.errors, 
+            'success-hint': !form.controls.password.errors }">
+            <span *ngIf="form.controls.password.dirty && form.controls.password.errors?.required">
+              Password is required.
+            </span>
+            <span *ngIf="form.controls.password.dirty && form.controls.password.errors?.minlength">
+              Password must be at least 8 characters.
+            </span>
+            <span *ngIf="form.controls.password.dirty && form.controls.password.errors?.maxlength">
+              Password cannot exceed 30 characters.
+            </span>
+            <span *ngIf="(form.controls.password.dirty && form.controls.password.errors?.validatePassword) && 
+            (!form.controls.password.errors?.required && !form.controls.password.errors?.minlength)">
+              Password must contain at least 1 letter, 1 number, 1 lowercase, 1 uppercase, and one special character.
+            </span>
+          </p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form__group">
+          <input 
+            type="password" 
+            class="form__input" 
+            placeholder="Confirm Password"
+            name="confirm" 
+            formControlName="confirm" 
+            required>
+          
+          <p class="form__hint" 
+            [ngClass]="
+            {'error-hint': (form.controls.confirm.dirty && form.controls.confirm.errors) || form.errors?.matchPasswords, 
+            'success-hint': !form.controls.confirm.errors && !form.errors?.matchPasswords }">
+            <span *ngIf="form.controls.confirm.dirty && form.controls.confirm.errors?.required">
+              Please confirm your password.
+            </span>
+            <span *ngIf="form.errors?.matchPasswords && form.controls.confirm.dirty">
+              Password doesn't match.
+            </span>
+          </p>
+        </div>
+
+          <div class="form__group">
+            <button [disabled]="!form.valid" class="button button--primary form__button" type="submit">Register</button>
+            <button class="button button--default form__button">Cancel</button>
+          </div>
       </form>
     </div>
   </div>
+

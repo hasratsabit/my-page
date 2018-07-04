@@ -79,6 +79,15 @@
     color: $color-green-light;
   }
 
+  &__input.ng-touched.ng-dirty.ng-invalid {
+    border-bottom: 1px solid $color-red-light;
+  }
+
+  &__input.ng-valid {
+    border-bottom: 1px solid $color-green-light;
+    background-color: $color-primary-accent;
+  }
+
   &__button {
     margin-right: 1.5rem;
   }
