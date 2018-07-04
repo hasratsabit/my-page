@@ -1,0 +1,34 @@
+<div class="top-navbar">
+    <ul class="top-navbar__right-navbar-list">
+      <li class="top-navbar__navbar-item"><a href="#" class="top-navbar__navbar-link">Login</a></li>
+      <li class="top-navbar__navbar-item"><a [routerLink]="['register']" class="top-navbar__navbar-link">Register</a></li>
+    </ul>
+  </div>
+  
+  
+  <div class="side-nav">
+    <div class="side-nav__user-info">
+      User Info
+    </div>
+  
+    <ul class="side-nav__navbar-list">
+      <li class="side-nav__navbar-item">
+        <a href="#" class="side-nav__navbar-link"><i class="fas fa-home"></i>Home</a>
+      </li>
+      <li class="side-nav__navbar-item">
+        <a href="#" class="side-nav__navbar-link"><i class="fas fa-code"></i>Tutorials</a>
+      </li>
+      <li class="side-nav__navbar-item">
+        <a href="#" class="side-nav__navbar-link"><i class="fas fa-book"></i>Blogs</a>
+      </li>
+      <li class="side-nav__navbar-item">
+        <a href="#" class="side-nav__navbar-link"><i class="fas fa-comment-alt"></i>Forum</a>
+      </li>
+      <li class="side-nav__navbar-item">
+        <a [routerLink]="['/components']" class="side-nav__navbar-link"><i class="fas fa-th-large"></i>Components</a>
+      </li>
+      <li class="side-nav__navbar-item">
+        <a href="#" class="side-nav__navbar-link"><i class="fas fa-envelope"></i>Contact</a>
+      </li>
+    </ul>
+  </div>

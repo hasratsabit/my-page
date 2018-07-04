@@ -1,0 +1,109 @@
+.top-navbar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50%;
+  @include respond(tab-port) {width: 70%}
+  @include respond(tab-land) {width: 80%}
+  background: $color-white;
+  z-index: 10;
+  // background: $color-primary-dark-1;  /* fallback for old browsers */
+  // background: -webkit-linear-gradient(to left, $color-primary-dark-1, $color-primary-light-1);  /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(to left, $color-primary-dark-1, $color-primary-light-1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: $shadow-medium;
+
+
+  &__right-navbar-list {
+    float: right;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__navbar-item {
+    display: inline-block;
+    padding: 2rem;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background: $color-grey-light-1;
+    }
+
+    &:hover .top-navbar__navbar-link {
+      text-decoration: none;
+      color: $color-primary-light-1;
+    }
+  }
+
+  &__navbar-link {
+    text-decoration: none;
+    color: $color-grey-dark-1;
+    display: inline-block;
+    font-size: 1.5rem;
+  }
+}
+
+
+// Side Nav
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  background: $color-white;
+  box-shadow: $shadow-medium;
+  z-index: 10;
+
+  @include respond(tab-port) {
+    width: 30%;
+  }
+
+  @include respond(tab-land) {
+    width: 20%;
+  }
+
+ 
+
+  &__user-info {
+    height: 15rem;
+
+    background: $color-primary-dark-1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, $color-primary-dark-1, $color-primary-light-1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, $color-primary-dark-1, $color-primary-light-1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  &__navbar-list {
+  
+  }
+
+  &__navbar-item {
+    width: 100%;
+    border-bottom: 1px solid $color-grey-light-1;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-grey-light-1;
+      transition: all 300ms ease-in-out;
+    }
+
+    &:hover .side-nav__navbar-link {
+      color: $color-primary-light-1;
+      text-decoration: none;
+    }
+
+  }
+
+  &__navbar-link {
+    width: 100%;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    padding: 2rem;
+    text-transform: uppercase;
+    color: $color-grey-dark-1;
+
+    .fas {
+      margin-right: 1rem;
+    }
+  }
+}

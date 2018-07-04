@@ -1,0 +1,85 @@
+.form {
+  position: relative;
+  padding: 2rem 3rem;
+  background-color: $color-white;
+  width: 100%;
+  box-shadow: $shadow-medium;
+  border-radius: 3px;
+
+
+  &__header {
+    background: $color-primary-light-1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    padding: 1.5rem;
+    color: $color-white;
+  }
+
+  &__input-container {
+    margin-top: 5rem;
+  }
+
+
+  &__group {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  // &__label {
+  //   position: absolute;
+  //   top: -5px;
+  //   left: 0;
+  //   color: $color-grey-dark-1;
+  //   font-size: 1.6rem;
+  //   z-index: 5;
+  //   transform: translateY(25px);
+  // }
+
+  &__input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: none;
+    height: 75%;
+    width: 100%;
+    border-bottom: 1px solid $color-grey-dark-2;
+    font-size: 1.8rem;
+    background: transparent;
+    transition: all 300ms ease-in-out;
+    &:focus {
+      outline: none;
+      border-bottom-color: $color-primary-light-1;
+    }
+
+    &::-webkit-input-placeholder {
+      opacity: 0.8;
+    }
+  }
+
+  &__hint {
+    position: absolute;
+    bottom: -2.3rem;
+    font-size: 1.5rem;
+  }
+
+  .error-hint {
+    color: $color-red-light;
+  }
+
+  .success-hint {
+    color: $color-green-light;
+  }
+
+  &__button {
+    margin-right: 1.5rem;
+  }
+}
