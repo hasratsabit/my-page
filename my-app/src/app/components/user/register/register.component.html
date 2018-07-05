@@ -2,6 +2,9 @@
     <div class="form__header">
         <h1 class="form__title">Registeration</h1>
     </div>
+    <div class="alert--form" *ngIf="alertMessage" [ngClass]="alertClass">
+      <span>{{alertMessage}}</span>
+    </div>
     <div class="form__input-container">
       <form [formGroup]="form" (submit)="onRegisterUser()">
 
@@ -149,7 +152,7 @@
         </div>
 
           <div class="form__group">
-            <button [disabled]="!form.valid" class="button button--primary form__button" type="submit">Register</button>
+            <button [disabled]="!form.valid || processing" class="button button--primary form__button" type="submit">Register</button>
             <button class="button button--default form__button">Cancel</button>
           </div>
       </form>

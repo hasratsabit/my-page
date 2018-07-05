@@ -1,22 +1,38 @@
+import { User } from './../user';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
+
+/****************************** 
+        Variables
+*******************************/
   public form: FormGroup;
+  public alertClass: String;
+  public alertMessage: String;
+  public processing: Boolean = false;
+  public subscription: Subscription;
 
   constructor(
-    public formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _userService: UserService
   ) {
     this.createRegisterForm();
    }
 
+
+/****************************** 
+      Creating Register Form
+*******************************/
   createRegisterForm() {
     this.form = this.formBuilder.group({
       name: ['', Validators.compose([
@@ -47,6 +63,11 @@ export class RegisterComponent implements OnInit {
     }, { validator: this.matchPasswords('password', 'confirm')})
   }
 
+
+
+  /****************************** 
+      Custome Validations
+  *******************************/
    validateName(control) {
     const regExp = new RegExp(/^[a-zA-Z ]+$/);
     if(regExp.test(control.value)) return null;
@@ -79,12 +100,60 @@ export class RegisterComponent implements OnInit {
   }
 
 
+/****************************** 
+      Form Activations
+*******************************/
+  disableForm() {
+    this.form.controls['name'].disable();
+    this.form.controls['email'].disable();
+    this.form.controls['username'].disable();
+    this.form.controls['password'].disable();
+  }
+  enableForm() {
+    this.form.controls['name'].enable();
+    this.form.controls['email'].enable();
+    this.form.controls['username'].enable();
+    this.form.controls['password'].enable();
+  }
+
+
+/****************************** 
+    Registering User
+*******************************/
   onRegisterUser(){
 
+    this.processing = true;
+    this.disableForm();
+
+    const user = <User> {
+      name: this.form.get('name').value,
+      email: this.form.get('email').value,
+      username: this.form.get('username').value,
+      password: this.form.get('password').value
+    }
+
+    this.subscription = this._userService.registerUser(user).subscribe(response => {
+      this.alertClass = 'alert alert--success';
+      this.alertMessage = response.message;
+    }, (err) => {
+      console.log(err);
+    })
+    setTimeout(() => {
+      this.alertClass = null;
+      this.alertMessage = null;
+      this.enableForm();
+      this.form.reset();
+      this.processing = false;
+    }, 2000);
   }
 
 
   ngOnInit() {
+
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

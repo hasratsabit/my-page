@@ -1,0 +1,19 @@
+.alert {
+  width: 100%;
+  padding: 12px;
+  border-radius: 3px;
+  color: $color-white;
+  font-size: 2rem;
+
+  &--error {
+    background-color: $color-red-light;
+  }
+
+  &--success {
+    background-color: $color-green-light;
+  }
+
+  &--form {
+    margin-top: 50px;
+  }
+}
